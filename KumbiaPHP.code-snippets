@@ -1,0 +1,253 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"createController": {
+		"scope": "php",
+		"prefix": "kcc",
+		"body": [
+			"Load::models('${1:model_name}'); ${4:controlador_creado}",
+			"class ${2:controllername}Controller extends AppController {",
+			"	public function index() {",
+			"		$this->${3:variable_de_modelo}s = Load::model('${1:model_name}')->find();",
+			"	}",
+			"",
+			"	public function show($id) {",
+			"		$this->${3:variable_de_modelo} = Load::model('${1:model_name}')->find_by_id((int)$id);",
+			"	}",
+			"",
+			"	public function create() {",
+			"		if (Input::hasPost('$3')) {",
+			"			${3:variable_de_modelo} =  Load::model('${1:model_name}');",
+			"			if ($${3:variable_de_modelo}->create(Input::post('${3:variable_de_modelo}'))) {",
+			"				Flash::valid('Elemento creado con éxito');",
+			"				return Redirect::to(); //al index de forma predeterminada",
+			"			}",
+			"		}",
+			"	}",
+			"",
+			"	public function edit($id) {",
+			"		if (Input::hasPost('${3:variable_de_modelo}')) {".
+			"			$${3:variable_de_modelo} =  Load::model('${1:model_name}')->find_by_id((int)$id);",
+			"			if ($${3:variable_de_modelo}->update(Input::post('$3'))) {",
+			"				Flash::valid('Elemento actualizado con éxito');",
+			"				return Redirect::to(); //al index de forma predeterminada",
+			"			} else {",
+			"				Flash::error('Fue imposible actualizar el elemento');2,
+			"			}","
+			"		}",
+			"		$this->${3:variable_de_modelo} = Load::model('${1:model_name}')->find_by_id((int)$id);",
+			"	}",
+			"",
+			"	public function destroy($id) {",
+			"		$${3:variable_de_modelo} =  Load::model('${1:model_name}')->find_by_id((int)$id);",
+			"		if ($${3:variable_de_modelo}->delete()){",
+			"		Flash::valid('Elemento eliminado con éxito');",
+			"		} else {",
+			"		Flash::error('Fue imposible eliminar el elemento');",
+			"		}",
+			"		return Redirect::to();",
+			"	}",
+			"}$0"
+		]
+	},
+
+	"createKumbiaModel": {
+		"scope": "php",
+    	"prefix": "kcm",
+    	"body": [
+			"class ${1:modelname} extends ActiveRecord {",
+			"	public function initialize() {",
+			"		$2"
+			"	}",
+			"}",
+			"$0"
+		]
+	},
+
+	"validatePresenceOf": {
+		"scope": "php",
+	    "prefix": "vpo",
+		"body": [
+			"$this->validates_presence_of('${1:campodelmodelo}');$2",
+			"$0"
+		]
+	},
+
+	"validateUniquenessOf": {
+		"scope": "php",
+    	"prefix": "vuo",
+    	"body": [
+        	"$this->validates_uniqueness_of('${1:campodelmodelo}');$2",
+			"$0"
+		]
+	},
+
+  	"validateEmailIn": {
+		"scope": "php",
+    	"prefix": "vei",
+    	"body": [
+        	"$this->validates_email_in('${1:campodelmodelo}');$2",
+			"$0"
+		]
+	},
+
+  	"validateDateIn": {
+		"scope": "php",
+    	"prefix": "vdi",
+    	"body": [
+        	"$this->validates_date_in('${1:campodelmodelo}');$2",
+			"$0"
+		]
+	},
+
+	"validateNumecarilityOf": {
+		"scope": "php",
+    	"prefix": "vno",
+    	"body": [
+        	"$this->validates_numericality_of('${1:campodelmodelo}');$2",
+			"$0"
+		]
+	},
+
+	"belongs_to": {
+		"scope": "php",
+    	"prefix": "bt",
+    	"body": [
+        	"$this->belongs_to('${1:modelo}');$2",
+	  		"$0"
+		]
+	},
+
+  	"has_many": {
+		"scope": "php",
+    	"prefix": "hm",
+    	"body": [
+        	"$this->has_many('${1:modelo}');$2",
+	  		"$0"
+		]
+	},
+
+  	"createForm": {
+		"scope": "php",
+    	"prefix": "kcf",
+    	"body": [
+      		"echo Form::open();",
+        	"$1",
+      		"echo Form::close();",
+			"$0",
+		]
+	},
+
+	"createRemoteForm":{
+		"scope": "php",
+    	"prefix": "kcrf",
+    	"body": [
+      		"echo Ajax::form('${1:divToRefresh}');",
+        	"$2",
+        	"echo Form::submit('${2:texto}', array('class'=>'btn ${3:extra}'));$3",
+        	"echo Html::linkAction(${4:accion}, ${5:texto}, array('class'=>'btn ${6:extra}'));$7",
+      		"echo Form::close();",
+			"$0"
+		]
+	},
+
+	"createInputText":  {
+		"scope": "php",
+    	"prefix": "kcit",
+    	"body": [
+		    "echo Form::label('${1:textoetiqueta}', '${2:campoinput}', array('class'=>'form-label'));",
+      		"echo Form::text('${2:campoinput}', array('class'=>'form-control'));$3",
+			"$0"
+		]
+	},
+
+  	"createInputPassword": {
+		"scope": "php",
+    	"prefix": "kcip",
+    	"body": [
+      		"echo Form::label('${1:textoetiqueta}', '${2:campoinput}', array('class'=>'form-label'));",
+      		"echo Form::pass('${2:campoinput}', array('class'=>'form-control'));$3",
+			"$0"
+		]
+	},
+
+	"createInputTextarea": {
+		"scope": "php",
+    	"prefix": "kcita",
+    	"body": [
+      		"echo Form::label('${1:textoetiqueta}', '${2:campoinput}', array('class'=>'form-label'));",
+      		"echo Form::textarea('${2:campoinput}', array('class'=>'form-control'));$3",
+			"$0"
+		]
+	},
+
+  	"createInputHidden": {
+		"scope": "php",
+    	"prefix": "kcih",
+    	"body": [
+      		"echo Form::hidden('${1:campoinput}', false, ${2:value});$3",
+			"$0"
+		]
+	},
+
+  	"createInputSelect": {
+		"scope": "php",
+    	"prefix": "kcis",
+    	"body": [
+      		"echo Form::label('${1:textoetiqueta}', '${2:campoinput}', array('class'=>'form-label'));",
+      		"echo Form::dbSelect('${2:campoinput}', '${3:campomostrar}', array('${4:modelo}', '${5:funcionbuscar}'), 'Seleccione' ,array('class'=>'form-control'));$6",
+			"$0"
+		]
+	},
+
+  	"createFormSubmit": {
+		"scope": "php",
+	    "prefix": "kcfs",
+    	"body": [
+      		"echo Form::submit('${1:texto}', array('class'=>'btn ${2:extra}'));$3",
+			"$0"
+		]
+	},
+
+  	"createFormCancel": {
+		"scope": "php",
+    	"prefix": "kcfc",
+    	"body": [
+      		"echo Html::linkAction(${1:accion}, ${2:texto}, array('class'=>'btn ${3:extra}'));$4",
+			"$0"
+		]
+	},
+
+  	"createInputCheck": {
+		"scope": "php",
+    	"prefix": "kcic",
+    	"body": [
+      		"echo Form::check('${1:campoinput}', ${2:valorparacheck}, ${3:atributos});$4",
+			"$0"
+		]
+	},
+
+  	"createInputRadio": {
+		"scope": "php",
+    	"prefix": "kcir",
+    	"body": [
+      		"echo Form::check('${1:campoinput}', ${2:valorparaseleccion}, ${3:atributos});$4",
+			"$0"
+		]
+	}
+}
