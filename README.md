@@ -34,4 +34,4 @@ Actualización para mejorar cuestiones de usabilidad y legibilidad en controller
 <p>kcrf: Crear remote Form con botones y cierre de etiqueta</p>
 
 <hr/>
-<p>Copiar el fichero KumbiaPHP.code-snippets en la carpeta C:\Users\<usuario>\AppData\Roaming\Code\User\snippets</p>
+<p>Copiar el fichero KumbiaPHP.code-snippets en la carpeta C:\Users\#usuario#\AppData\Roaming\Code\User\snippets</p>
