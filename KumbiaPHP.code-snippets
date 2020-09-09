@@ -26,7 +26,7 @@
 			"	}",
 			"",
 			"	public function show($$id) {",
-			"		$$this->${3:variable_de_modelo} = (new ${1:model_name})->find_by_id((int) $$id);",
+			"		$$this->${3:variable_de_modelo}s = (new ${1:model_name})->find_by_id((int) $$id);",
 			"	}",
 			"",
 			"	public function create() {",
